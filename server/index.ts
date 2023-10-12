@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import router from "./routes/user.route";
 
 const express = require("express");
 const dotenv = require("dotenv");
@@ -17,10 +18,7 @@ mongoose
     console.log(err);
   });
 
-app.get("/", (req, res) => {
-  res.send("Express + TypeScript Server");
-});
-
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+app.use("/api/user", router);
