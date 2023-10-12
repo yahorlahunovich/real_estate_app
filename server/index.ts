@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import router from "./routes/user.route";
+import userRouter from "./routes/user.route";
+import authRouter from "./routes/auth.route";
 
 const express = require("express");
 const dotenv = require("dotenv");
@@ -21,4 +22,7 @@ mongoose
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
-app.use("/api/user", router);
+
+app.use(express.json());
+app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
