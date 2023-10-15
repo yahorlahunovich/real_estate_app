@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import userRouter from "./routes/user.route";
-import authRouter from "./routes/auth.route";
-
-const express = require("express");
-const dotenv = require("dotenv");
+import express from "express";
+import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -15,7 +14,7 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
   })
-  .catch((err: any) => {
+  .catch((err) => {
     console.log(err);
   });
 
