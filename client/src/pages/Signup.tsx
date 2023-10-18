@@ -6,14 +6,27 @@ type SignupProps = {
 
 const Signup = ({ setIsSignup }: SignupProps) => {
   const [formData, setFormData] = useState({});
-  const submitHandler = (e: React.SyntheticEvent) => {
+  const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const res = await fetch('http://localhost:3000/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await res.json();
+    console.log(data);
     setIsSignup(false);
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
   };
-  console.log(formData);
+
   return (
     <div className="absolute flex flex-col top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-grey-200">
       <h3>Sign up</h3>
@@ -38,7 +51,7 @@ const Signup = ({ setIsSignup }: SignupProps) => {
             type="text"
             placeholder="Second Name"
             onChange={handleChange}
-            id="secondName"
+            id="lastName"
             className="w-full border border-black"
           />
           <input
