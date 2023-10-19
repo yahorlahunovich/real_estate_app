@@ -6,6 +6,7 @@ import {
   signInStart,
   signInSuccess,
 } from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 type SignupProps = {
   setIsSignin: (isSignup: boolean) => void;
@@ -71,6 +72,7 @@ const Signin = ({ setIsSignin }: SignupProps) => {
           <button disabled={loading} type="submit" className="">
             {loading ? "Loading..." : "Sign in"}
           </button>
+          <OAuth />
         </form>
       </div>
       {error && <p className="text-red-500">{error}</p>}

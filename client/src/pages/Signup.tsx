@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 type SignupProps = {
   setIsSignup: (isSignup: boolean) => void;
@@ -83,6 +84,7 @@ const Signup = ({ setIsSignup }: SignupProps) => {
           <button disabled={loading} type="submit" className="">
             {loading ? "Loading..." : "Sign up"}
           </button>
+          <OAuth />
         </form>
       </div>
       {error && <p className="text-red-500">{error}</p>}
