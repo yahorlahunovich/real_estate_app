@@ -32,6 +32,7 @@ const Signup = ({ setIsSignup }: SignupProps) => {
       setLoading(false);
       setError(null);
       navigate('/sign-in');
+      setIsSignup(false);
     } catch (error : any) {
       setLoading(false);
       setError(error.message);
