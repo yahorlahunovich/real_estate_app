@@ -15,10 +15,10 @@ const Signup = ({ setIsSignup }: SignupProps) => {
     setLoading(true);
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -31,9 +31,9 @@ const Signup = ({ setIsSignup }: SignupProps) => {
       }
       setLoading(false);
       setError(null);
-      navigate('/sign-in');
+      navigate("/sign-in");
       setIsSignup(false);
-    } catch (error : any) {
+    } catch (error: any) {
       setLoading(false);
       setError(error.message);
     }

@@ -5,18 +5,21 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
+import Signin from "./pages/Signin";
 
 const App = () => {
   const [isSignup, setIsSignup] = useState(false);
+  const [isSignin, setIsSignin] = useState(false);
   return (
     <BrowserRouter>
-      <Header isSignup={isSignup} setIsSignup={setIsSignup} />
+      <Header setIsSignin={setIsSignin} setIsSignup={setIsSignup} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
       {isSignup && <Signup setIsSignup={setIsSignup} />}
+      {isSignin && <Signin setIsSignin={setIsSignin} />}
     </BrowserRouter>
   );
 };

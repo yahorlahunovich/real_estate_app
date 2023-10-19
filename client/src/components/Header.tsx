@@ -3,11 +3,11 @@ import { logo } from "../assets/icons";
 import { useState } from "react";
 
 type HeaderProps = {
-  isSignup: boolean;
   setIsSignup: (isSignup: boolean) => void;
-}
-  
-const Header = ({isSignup, setIsSignup} : HeaderProps) => {
+  setIsSignin: (isSignin: boolean) => void;
+};
+
+const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   return (
     <header className="flex flex-row justify-between items-center px-16 uppercase border-b border-gray-200">
@@ -47,7 +47,15 @@ const Header = ({isSignup, setIsSignup} : HeaderProps) => {
           >
             Sign up
           </li>
-          <li className="cursor-pointer">Log in</li>
+          <li
+            className="cursor-pointer"
+            onClick={() => {
+              setIsSignin(true);
+              setIsProfileClicked(false);
+            }}
+          >
+            Log in
+          </li>
           <li></li>
           <li></li>
         </ul>
