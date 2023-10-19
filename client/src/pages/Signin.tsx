@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
 type SignupProps = {
   setIsSignin: (isSignup: boolean) => void;
@@ -7,34 +13,31 @@ type SignupProps = {
 
 const Signin = ({ setIsSignin }: SignupProps) => {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(signInStart());
     try {
-      setLoading(true);
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        dispatch(signInFailure(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
-      navigate('/');
+      dispatch(signInSuccess(data));
+      navigate("/");
       setIsSignin(false);
-    } catch (error : any) {
-      setLoading(false);
-      setError(error.message);
+    } catch (error: any) {
+      dispatch(signInFailure(error.message));
     }
   };
 
