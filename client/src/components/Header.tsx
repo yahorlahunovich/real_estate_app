@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { logo } from "../assets/icons";
 import { useState } from "react";
+import { useAppSelector } from "../redux/hooks";
 
 type HeaderProps = {
   setIsSignup: (isSignup: boolean) => void;
@@ -9,6 +10,7 @@ type HeaderProps = {
 
 const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
+  const { currentUser } = useAppSelector((state) => state.user);
   return (
     <header className="flex flex-row justify-between items-center px-16 uppercase border-b border-gray-200">
       <div>
@@ -24,12 +26,25 @@ const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
         />
       </form>
       <nav className="flex flex-row justify-center items-center gap-4">
+        {currentUser ? (
+          <Link to="/profile">
+            <img
+              src={currentUser.avatar}
+              alt="profile image"
+              className="w-14"
+            />
+            {currentUser.firstName}
+          </Link>
+        ) : (
+          ""
+        )}
         <span
           className="cursor-pointer"
           onClick={() => setIsProfileClicked(!isProfileClicked)}
         >
           Profile
         </span>
+
         {/* <Link to=""></Link> */}
       </nav>
       {isProfileClicked && (
@@ -56,8 +71,15 @@ const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
           >
             Log in
           </li>
-          <li></li>
-          <li></li>
+          <li
+            className="cursor-pointer"
+            onClick={() => {
+              setIsSignin(true);
+              setIsProfileClicked(false);
+            }}
+          >
+            Sign out
+          </li>
         </ul>
       )}
     </header>

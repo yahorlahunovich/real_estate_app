@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Header from "./components/Header";
 import Signin from "./pages/Signin";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -16,7 +17,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
       {isSignup && <Signup setIsSignup={setIsSignup} />}
       {isSignin && <Signin setIsSignin={setIsSignin} />}
