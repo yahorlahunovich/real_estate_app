@@ -11,6 +11,9 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  signOutUserFailure,
+  signOutUserStart,
+  signOutUserSuccess,
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
@@ -97,6 +100,21 @@ const Profile = () => {
       dispatch(deleteUserFailure(error.message));
     }
   };
+  const handleSignOut = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutUserFailure(data.message));
+        return;
+      }
+      dispatch(signOutUserSuccess(data));
+    } catch (error) {
+      dispatch(signOutUserFailure(error.message));
+    }
+  };
   return (
     <div className="flex flex-col justify-center items-center w-[1200px] m-auto p-24">
       <h1>Profile</h1>
@@ -152,7 +170,7 @@ const Profile = () => {
       </form>
       <div className="flex flex-row justify-between items-center w-[300px] mt-5">
         <button onClick={handleDelete}>Delete Account</button>
-        <button>Sign out</button>
+        <button onClick={handleSignOut}>Sign out</button>
       </div>
       <p className="text-green-400">
         {updateSuccess ? "User updated successfully!" : ""}
