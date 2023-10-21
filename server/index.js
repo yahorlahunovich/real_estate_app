@@ -4,6 +4,7 @@ import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Use this after the variable declaration
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use((err, req, res, next) => {
