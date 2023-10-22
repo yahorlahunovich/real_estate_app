@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
-type SignupProps = {
-  setIsSignup: (isSignup: boolean) => void;
-};
-
-const Signup = ({ setIsSignup }: SignupProps) => {
+const Signup = () => {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +29,6 @@ const Signup = ({ setIsSignup }: SignupProps) => {
       setLoading(false);
       setError(null);
       navigate("/sign-in");
-      setIsSignup(false);
     } catch (error: any) {
       setLoading(false);
       setError(error.message);
@@ -86,6 +81,9 @@ const Signup = ({ setIsSignup }: SignupProps) => {
           </button>
           <OAuth />
         </form>
+        <span>
+          Already have an account? <Link className="text-red-200" to="/signin">Sign in</Link>
+        </span>
       </div>
       {error && <p className="text-red-500">{error}</p>}
     </div>

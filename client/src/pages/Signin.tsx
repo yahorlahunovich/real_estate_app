@@ -8,11 +8,7 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 
-type SignupProps = {
-  setIsSignin: (isSignup: boolean) => void;
-};
-
-const Signin = ({ setIsSignin }: SignupProps) => {
+const Signin = () => {
   const [formData, setFormData] = useState({});
   const { loading, error } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
@@ -36,7 +32,6 @@ const Signin = ({ setIsSignin }: SignupProps) => {
       }
       dispatch(signInSuccess(data));
       navigate("/");
-      setIsSignin(false);
     } catch (error: any) {
       dispatch(signInFailure(error.message));
     }

@@ -3,12 +3,7 @@ import { logo } from "../assets/icons";
 import { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 
-type HeaderProps = {
-  setIsSignup: (isSignup: boolean) => void;
-  setIsSignin: (isSignin: boolean) => void;
-};
-
-const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
+const Header = () => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const { currentUser } = useAppSelector((state) => state.user);
   return (
@@ -38,14 +33,17 @@ const Header = ({ setIsSignin, setIsSignup }: HeaderProps) => {
         ) : (
           ""
         )}
-        <span
+        {/* <span
           className="cursor-pointer"
           onClick={() => setIsProfileClicked(!isProfileClicked)}
         >
           Profile
-        </span>
+        </span> */}
 
         {/* <Link to=""></Link> */}
+        <Link to="/about">About</Link>
+        <Link to="/signin">Sign in</Link>
+        <Link to="/signup">Join</Link>
       </nav>
       {isProfileClicked && (
         <ul
