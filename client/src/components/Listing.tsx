@@ -1,8 +1,9 @@
-import { ListingType } from "./Listings";
+import { ListingType } from "../redux/listing/listingSlice";
+
 
 const Listing = ({ listing }: ListingType) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col cursor-pointer">
       <img
         className="rounded-xl  w-[300px] h-[300px] object-cover"
         src={listing.image}
