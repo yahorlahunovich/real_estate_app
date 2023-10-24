@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type ListingType = {
   name: string;
@@ -9,11 +8,11 @@ export type ListingType = {
   id: string;
 };
 type ListingState = {
-  listings: ListingType[];
+  initListings: ListingType[];
 };
 
 const initialState: ListingState = {
-  listings: [
+  initListings: [
     {
       name: "Powiat Krakowski",
       description: "lore  ",
@@ -59,9 +58,11 @@ const initialState: ListingState = {
 
 export const listingSlice = createSlice({
   name: "listing",
-  initialState: initialState,
-  reducers: {},
+  initialState,
+  reducers: {
+    sayHi: () => console.log('hi!'),
+  },
 });
 
-// export const {} = listingSlice.actions;
+export const { sayHi } = listingSlice.actions;
 export const listingReducer = listingSlice.reducer;

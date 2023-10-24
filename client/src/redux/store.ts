@@ -6,8 +6,8 @@ import persistStore from "redux-persist/es/persistStore";
 import { listingReducer } from "./listing/listingSlice";
 
 const rootReducer = combineReducers({
-  user: userReducer,
   listing: listingReducer,
+  user: userReducer,   
 });
 
 const persistConfig = {
